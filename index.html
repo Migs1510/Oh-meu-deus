@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Pedido Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Cardápio do Restaurante</h1>
+
+  <section id="category-section">
+    <h2>Categorias</h2>
+    <select id="categorySelect"></select>
+  </section>
+
+  <section id="dish-form-section">
+    <h2>Cadastrar Prato</h2>
+    <form id="dishForm">
+      <input type="text" id="dishName" placeholder="Nome do prato" required>
+      <input type="number" id="dishPrice" placeholder="Preço" required>
+      <select id="dishCategory" required></select>
+      <input type="text" id="restaurantId" placeholder="ID do Restaurante" required>
+      <button type="submit">Cadastrar</button>
+    </form>
+  </section>
+
+  <section id="dishes-section">
+    <h2>Pratos</h2>
+    <div id="dishesList"></div>
+  </section>
+
+  <script src="js/model.js"></script>
+  <script src="js/view.js"></script>
+  <script src="js/controller.js"></script>
+</body>
+</html>
