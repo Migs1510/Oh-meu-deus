@@ -22,8 +22,8 @@ body {
   button {
     padding: 0.5rem 1rem;
     background: #ffc400;
-    color: white;
-    border: none;
+    color: black;
+    border: #333;
     border-radius: 5px;
   }
   .dish-card {
