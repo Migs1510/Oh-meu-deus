@@ -1,24 +1,29 @@
-let dishes = [];
-let idCounter = 1;
+const db = require('/db');
 
 const DishModel = {
-  create: (dishData) => {
-    const newDish = { id: idCounter++, ...dishData };
-    dishes.push(newDish);
-    return newDish;
+  create: async (dishData) => {
+    const { name, price, category, restaurant_id } = dishData;
+    const [result] = await db.execute(
+      'INSERT INTO dishes (name, price, category, restaurant_id) VALUES (?, ?, ?, ?)',
+      [name, price, category, restaurant_id]
+    );
+    return { id: result.insertId, ...dishData };
   },
 
-  findByRestaurant: (restaurantId) => {
-    return dishes.filter(d => d.restaurant_id === restaurantId);
+  findByRestaurant: async (restaurantId) => {
+    const [rows] = await db.execute(
+      'SELECT * FROM dishes WHERE restaurant_id = ?',
+      [restaurantId]
+    );
+    return rows;
   },
 
-  updatePrice: (id, newPrice) => {
-    const dish = dishes.find(d => d.id === id);
-    if (dish) {
-      dish.price = newPrice;
-      return true;
-    }
-    return false;
+  updatePrice: async (id, newPrice) => {
+    const [result] = await db.execute(
+      'UPDATE dishes SET price = ? WHERE id = ?',
+      [newPrice, id]
+    );
+    return result.affectedRows > 0;
   }
 };
 
